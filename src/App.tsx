@@ -993,7 +993,7 @@ function SimulatorPage({ theme }: { theme: 'light' | 'dark' }) {
               {/* Data Visualization Section */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="glass-panel p-6 sm:p-8">
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-8">
                     <h3 className="terminal-text text-sm font-bold flex items-center gap-3">
                       <BarChart3 className="w-4 h-4 text-accent" />
                       SKILL_GAP_ANALYSIS
@@ -1002,7 +1002,7 @@ function SimulatorPage({ theme }: { theme: 'light' | 'dark' }) {
                   </div>
                   <div className="h-[300px] sm:h-[350px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
-                      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={result.chartData}>
+                      <RadarChart cx="50%" cy="50%" outerRadius="65%" data={result.chartData} margin={{ top: 20, right: 40, bottom: 20, left: 40 }}>
                         <PolarGrid stroke={theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(15,23,42,0.1)'} />
                         <PolarAngleAxis 
                           dataKey="name" 
@@ -1036,7 +1036,7 @@ function SimulatorPage({ theme }: { theme: 'light' | 'dark' }) {
                 </div>
 
                 <div className="glass-panel p-6 sm:p-8">
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-8">
                     <h3 className="terminal-text text-sm font-bold flex items-center gap-3">
                       <Layers className="w-4 h-4 text-secondary" />
                       TIME_ALLOCATION_MODEL
