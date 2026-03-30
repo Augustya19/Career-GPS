@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap');
+
+@theme {
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; filter: blur(20px); }
+    50% { opacity: 0.8; filter: blur(40px); }
+  }
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  --animate-scanline: scanline 8s linear infinite;
+}
+
+@layer base {
+  :root {
+    --bg: #fdfcf0;
+    --surface: #ffffff;
+    --accent: #5a5a40;
+    --secondary: #a34b32;
+    --ink: #2d2d2d;
+    --muted: #71717a;
+    --border: rgba(45, 45, 45, 0.08);
+    --glow-accent-color: rgba(90, 90, 64, 0.2);
+    --glow-secondary-color: rgba(163, 75, 50, 0.2);
+    --radial-accent: rgba(90, 90, 64, 0.03);
+    --radial-secondary: rgba(163, 75, 50, 0.03);
+  }
+
+  .dark {
+    --bg: #0a0a0a;
+    --surface: #151515;
+    --accent: #a3a375; /* Lighter olive for dark mode */
+    --secondary: #f97316; /* Brighter rust/orange for dark mode */
+    --ink: #f5f5f5;
+    --muted: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.1);
+    --glow-accent-color: rgba(163, 163, 117, 0.3);
+    --glow-secondary-color: rgba(249, 115, 22, 0.3);
+    --radial-accent: rgba(163, 163, 117, 0.05);
+    --radial-secondary: rgba(249, 115, 22, 0.05);
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased selection:bg-accent selection:text-white overflow-x-hidden transition-colors duration-300;
+    background-image: 
+      radial-gradient(circle at 50% 0%, var(--radial-accent) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, var(--radial-secondary) 0%, transparent 50%);
+  }
+}
+
+/* Glass Morphism */
+.glass-panel {
+  @apply bg-surface/80 backdrop-blur-xl border border-ink/10 shadow-xl transition-colors duration-300;
+}
+
+.glass-panel-accent {
+  @apply bg-accent/5 backdrop-blur-xl border border-accent/20 shadow-[0_0_30px_rgba(90,90,64,0.05)] transition-colors duration-300;
+}
+
+/* Typography */
+.terminal-text {
+  @apply font-mono tracking-tight;
+}
+
+.status-label {
+  @apply font-mono text-[10px] uppercase tracking-[0.2em] text-muted;
+}
+
+.heading-display {
+  @apply font-sans font-extrabold uppercase tracking-tighter leading-none;
+}
+
+/* Inputs & Buttons */
+.tactical-input {
+  @apply bg-surface border border-ink/10 p-4 font-mono text-sm outline-none focus:border-accent/50 transition-all placeholder:text-muted/50 text-ink;
+}
+
+.btn-tactical {
+  @apply relative overflow-hidden bg-accent text-white font-mono font-bold px-8 py-4 uppercase tracking-wider transition-all hover:brightness-110 active:scale-95 disabled:opacity-50;
+}
+
+.btn-tactical-outline {
+  @apply relative overflow-hidden bg-transparent text-accent border border-accent/30 font-mono font-bold px-8 py-4 uppercase tracking-wider transition-all hover:bg-accent/5 hover:border-accent active:scale-95 disabled:opacity-50;
+}
+
+/* Decorative Elements */
+.scanline {
+  @apply absolute inset-0 pointer-events-none overflow-hidden opacity-[0.01];
+  background: linear-gradient(to bottom, transparent, #000, transparent);
+  height: 100%;
+  animation: scanline 8s linear infinite;
+}
+
+.grid-bg {
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-accent/20 hover:bg-accent/40 transition-colors;
+}
+
+.glow-accent {
+  text-shadow: 0 0 10px var(--glow-accent-color);
+}
+
+.glow-secondary {
+  text-shadow: 0 0 10px var(--glow-secondary-color);
+}
